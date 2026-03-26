@@ -1,19 +1,24 @@
-﻿#include <stdio.h>
+﻿#define _USE_MATH_DEFINES
+#include <stdio.h>
 #include <math.h>
 #include <locale.h>
 #include <stdlib.h>
+
 
 typedef struct {
 	float (*firstterm)(float);
 	float (*nextterm)(float, float, int);
 } Series;
 
+void prev(float* x) {
+	*x = *x - floorf(*x / (2 * (float)M_PI)) * 2 * (float)M_PI;
+}
 //sin
 float sin_first(float x) {
 	return x;
 }
 float sin_next(float prev, float x, int n) {
-	return -prev * x * x / ((float)((2 * n) * (2 * n + 1)));
+	return -prev * x * x / (((2.0f * n) * (2.0f * n + 1.0f)));
 }
 //cos
 float cos_first(float x) {
@@ -151,6 +156,7 @@ int main() {
 
 		switch (choice) {
 		case 1:
+			prev(&x);
 			s.firstterm = sin_first;
 			s.nextterm = sin_next;
 			func_name = "sin(x)";
@@ -158,6 +164,7 @@ int main() {
 			printfunc(s, func_name, x, max_n, math_func);
 			break;
 		case 2:
+			prev(&x);
 			s.firstterm = cos_first;
 			s.nextterm = cos_next;
 			func_name = "cos(x)";
