@@ -25,7 +25,7 @@ float cos_first(float x) {
 	return 1.0f;
 }
 float cos_next(float prev, float x, int n) {
-	return -prev * x * x / ((float)((2 * n - 1) * (2 * n)));
+	return -prev * x * x / (((2.0f * n - 1.0f) * (2.0f * n)));
 }
 //exp
 float exp_first(float x) {
@@ -41,7 +41,7 @@ float ln_first(float x) {
 }
 float ln_next(float prev, float x, int n) {
 	float t = (x - 1.0f) / (x + 1.0f);
-	return prev * t * t * (float)(2 * n - 1) / (float)(2 * n + 1);
+	return prev * t * t * (2.0f * n - 1.0f) / (2.0f * n + 1.0f);
 }
 //прямое
 float sum_direct(Series s, float x, int max_n) {
